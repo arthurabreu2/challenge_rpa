@@ -11,7 +11,6 @@ from RPA.Robocorp.WorkItems import WorkItems
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -31,14 +30,9 @@ def extract_news():
     search_phrase = work_items.get_work_item_variable('search_phrase', 'technology')
     news_category = work_items.get_work_item_variable('news_category', 'Technology and the Internet')
 
-    # WebDriver configuration for Chrome 
-    service = Service(ChromeDriverManager().install())
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-
-    driver = webdriver.Chrome(service=service, options=options)
+    # WebDriver configuration for Firefox 
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(service=service)
     driver.get("https://www.latimes.com")
     wait = WebDriverWait(driver, 20)
 
