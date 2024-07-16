@@ -4,7 +4,7 @@
 tasks:
   Extract News:
     robotTask: true
-    script: rpa_challenge.py
+    script: tasks.py
   Run Task:
     shell: python -m robocorp.tasks run tasks.py
 
