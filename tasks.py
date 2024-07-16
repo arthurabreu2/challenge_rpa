@@ -1,8 +1,13 @@
+# Main imports
 import pandas as pd 
 import datetime as dt
 import logging
 from utils import download_images
+
+# RPA Imports
 from RPA.Robocorp.WorkItems import WorkItems
+
+# Selenium Imports
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
