@@ -8,12 +8,11 @@ channels:
 dependencies:
   - python=3.10.12                # https://pyreadiness.org/3.10
   - pip                           # https://pip.pypa.io/en/stable/news
-  - selenium
-  - pandas
   - robocorp-truststore=0.8.0     # https://pypi.org/project/robocorp-truststore/
   - pip:
+    - selenium
+    - pandas
     - rpaframework==28.0.0        # https://rpaframework.org/releasenotes.html
     - robocorp==1.4.0             # https://pypi.org/project/robocorp
     - robocorp-browser==2.2.1     # https://pypi.org/project/robocorp-browser
-    - webdriver_manager
     - requests
