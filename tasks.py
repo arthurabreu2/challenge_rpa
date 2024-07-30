@@ -13,6 +13,7 @@ def extrack_news():
     Main task to initialize and control the news scraping process. 
     """
     work_items = WorkItems()
+    scraper = None
     try:
         work_items.get_input_work_item()
         search_phrase = work_items.get_work_item_variable('search_phrase', 'technology')
