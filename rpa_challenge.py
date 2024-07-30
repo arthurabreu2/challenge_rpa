@@ -5,8 +5,8 @@ import logging
 
 # Selenium imports
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -53,10 +53,10 @@ class FreshNews:
             WebDriverException: An error occurred while setting up the WebDriver.
         """
         try:
-            service = Service(GeckoDriverManager().install())
-            options = webdriver.FirefoxOptions()
-            # options.add_argument("--headless")  # Runs the browser in headless mode.
-            driver = webdriver.Firefox(service=service, options=options)
+            service = Service(ChromeDriverManager().install())
+            options = webdriver.ChromeOptions()
+            options.add_argument("--headless")  # Runs the browser in headless mode.
+            driver = webdriver.Chrome(service=service, options=options)
             driver.get("https://www.latimes.com")
             return driver
         except WebDriverException as e:

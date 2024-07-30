@@ -16,3 +16,4 @@ dependencies:
     - selenium
     - pandas
     - webdriver_manager
+    - requests
