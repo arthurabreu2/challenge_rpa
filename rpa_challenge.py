@@ -81,9 +81,10 @@ class FreshNews:
             search_input.send_keys(Keys.ENTER)
 
             technology_filter = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), '" + self.news_category + "')]"))
-                )
+                EC.element_to_be_clickable((By.XPATH, "//div[@data-name='Topics']//span[contains(text(), '" + self.news_category + "')]"))
+            )
             technology_filter.click()
+
         except TimeoutException as e:
             logging.error(f"Timeout occurred while searching articles: {e}")
             raise
@@ -153,16 +154,23 @@ class FreshNews:
         
         Uses the latest article's image for downloading and logging.
         """
-        if self.articles_list:
-            df = pd.DataFrame(self.articles_list)
-            df.to_excel('output/excel_files/news_data.xlsx', index=False)
-            logging.info("Data saved to Excel.")
-            download_images(self.articles_list[-1]['image_url'])
-        else:
-            logging.info("No articles found.")
+        try:
+            if self.articles_list:
+                df = pd.DataFrame(self.articles_list)
+                df.to_excel('output/excel_files/news_data.xlsx', index=False)
+                logging.info("Data saved to Excel.")
+                download_images(self.articles_list[-1]['image_url'])
+            else:
+                logging.info("No articles found.")
+        except NoSuchElementException as e:
+            logging.error(f"An error occurred while saving data: {e}")
+            raise
 
     def close_driver(self):
         """
         Safely closes the WebDriver session to free up resources.
         """
-        self.driver.quit()
+        try:
+            self.driver.quit()
+        except WebDriverException as e:
+            logging.error(f"An error occurred while closing the WebDriver: {e}")
